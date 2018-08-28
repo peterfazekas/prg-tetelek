@@ -1,22 +1,23 @@
 package hu.prgtetelek.model.service.simple;
 
-public class Count implements SimpleStrategy<Integer> {
+import java.util.List;
+import java.util.function.Predicate;
 
-	private final int[] x;
+public class Count implements SimpleStrategy<Long> {
+
+	private final List<Integer> x;
 	
-	public Count(final int[] x) {
+	public Count(final List<Integer> x) {
 		this.x = x;
 	}
 
 	@Override
-	public Integer getResult(int denominator) {
-		int db = 0;
-		for (int i : x) {
-			if (i % denominator == 0) {
-				db++;
-			}
-		}
-		return db;
+	public Long getResult(int denominator) {
+		return x.stream().filter(isDivisible(denominator)).count();
+	}
+
+	private Predicate<Integer> isDivisible(int denominator) {
+		return i -> i % denominator == 0;
 	}
 
 }

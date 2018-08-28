@@ -1,24 +1,24 @@
 package hu.prgtetelek.model.service.simple;
 
+import java.util.List;
+import java.util.function.Predicate;
+
 public class Select implements SimpleStrategy<Integer> {
 
-	private final int[] x;
+	private final List<Integer> x;
 	
-	public Select(final int[] x) {
+	public Select(final List<Integer> x) {
 		this.x = x;
 	}
 
 	@Override
 	public Integer getResult(int denominator) {
-		int i = 0;
-		while (isNotDivisible(i, denominator)) {
-			i++;
-		}
-		return i;
+		return x.stream().filter(isDivisible(denominator)).findFirst().get();
+	}
+
+	private Predicate<Integer> isDivisible(int denominator) {
+		return i -> i % denominator == 0;
 	}
 	
-	private boolean isNotDivisible(int i, int denominator) {
-		return i < x.length && !(x[i] % denominator == 0);
-	}
 
 }

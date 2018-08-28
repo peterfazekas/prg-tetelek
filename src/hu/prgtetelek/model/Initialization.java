@@ -1,5 +1,7 @@
 package hu.prgtetelek.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Initialization {
@@ -12,12 +14,12 @@ public class Initialization {
 		this.bound = bound;
 	}
 
-	public int[] init() {
-		int[] tomb = new int[n];
+	public List<Integer> init() {
+		List<Integer> list = new ArrayList<>();
 		Random random = new Random();
-		for (int i = 0; i < tomb.length; i++) {
-			tomb[i] = random.nextInt(bound - 1) + 1;
+		for (int i = 0; i < n; i++) {
+			list.add(random.nextInt(bound - 1) + 1);
 		}
-		return tomb;
+		return list;
 	}
 }

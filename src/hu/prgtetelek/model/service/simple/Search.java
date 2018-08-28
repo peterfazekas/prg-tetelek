@@ -1,24 +1,19 @@
 package hu.prgtetelek.model.service.simple;
 
-public class Search implements SimpleStrategy<Integer> {
+import java.util.List;
+import java.util.Optional;
 
-	private final int[] x;
+public class Search implements SimpleStrategy<Optional<Integer>> {
+
+	private final List<Integer> x;
 	
-	public Search(final int[] x) {
+	public Search(final List<Integer> x) {
 		this.x = x;
 	}
 
 	@Override
-	public Integer getResult(int denominator) {
-		int i = 0;
-		while (isNotDivisible(i, denominator)) {
-			i++;
-		}
-		return i < x.length ? i : -1;
+	public Optional<Integer> getResult(int denominator) {
+		return x.stream().filter(i -> i % denominator == 0).findFirst();
 	}
 	
-	private boolean isNotDivisible(int i, int denominator) {
-		return i < x.length && !(x[i] % denominator == 0);
-	}
-
 }

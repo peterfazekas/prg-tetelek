@@ -17,7 +17,7 @@ public class App {
 
 	private void runApp() {
 		System.out.println(facade.getSum());
-		System.out.println(facade.hasValue(97));
+		System.out.println(facade.hasValue(2));
 		System.out.println(facade.select(37));
 		System.out.println(facade.search(101));
 		System.out.println(facade.count(37));

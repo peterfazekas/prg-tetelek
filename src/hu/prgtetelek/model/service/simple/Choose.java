@@ -1,24 +1,28 @@
 package hu.prgtetelek.model.service.simple;
 
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
 public class Choose implements SimpleStrategy<Boolean> {
 
-	private final int[] x;
+	private final List<Integer> x;
 	
-	public Choose(final int[] x) {
+	public Choose(final List<Integer> x) {
 		this.x = x;
 	}
 
 	@Override
 	public Boolean getResult(int denominator) {
-		int i = 0;
-		while (isNotDivisible(i, denominator)) {
-			i++;
-		}
-		return i < x.length;
+		List<Integer> collect = x.stream()
+				.filter(isDivisible(denominator))
+				.collect(Collectors.toList());
+		return collect.size() > 0;
+	}
+
+	private Predicate<Integer> isDivisible(int denominator) {
+		return i -> i % denominator == 0;
 	}
 	
-	private boolean isNotDivisible(int i, int denominator) {
-		return i < x.length && !(x[i] % denominator == 0);
-	}
 
 }

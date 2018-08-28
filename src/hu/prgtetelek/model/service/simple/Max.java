@@ -1,22 +1,19 @@
 package hu.prgtetelek.model.service.simple;
 
+import java.util.List;
+
 public class Max implements SimpleStrategy<Integer> {
 
-	private final int[] x;
+	private final List<Integer> x;
 	
-	public Max(final int[] x) {
+	public Max(final List<Integer> x) {
 		this.x = x;
 	}
 
 	@Override
 	public Integer getResult(int denominator) {
-		int max = 0;
-		for (int i = 1; i < x.length; i++) {
-			if (x[max] < x[i]) {
-				max = i;
-			}
-		}
-		return max;
+		return x.stream().mapToInt(Integer::intValue).max().getAsInt();
+
 	}
 
 }

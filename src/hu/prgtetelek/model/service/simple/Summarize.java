@@ -1,20 +1,18 @@
 package hu.prgtetelek.model.service.simple;
 
+import java.util.List;
+
 public class Summarize implements SimpleStrategy<Integer> {
 
-	private final int[] x;
+	private final List<Integer> x;
 	
-	public Summarize(final int[] x) {
+	public Summarize(final List<Integer> x) {
 		this.x = x;
 	}
 
 	@Override
 	public Integer getResult(int denominator) {
-		int s = 0;
-		for (int i : x) {
-			s += i; 
-		}
-		return s;
+		return x.stream().mapToInt(Integer::intValue).sum();
 	}
 
 }
